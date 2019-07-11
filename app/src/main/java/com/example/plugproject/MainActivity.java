@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         loadApk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String apkPath = "";
+                String apkPath = Utils.copyAssetAndWrite(MainActivity.this, "apk");
                 PluginManager.getInstance().loadApk(apkPath);
             }
         });
