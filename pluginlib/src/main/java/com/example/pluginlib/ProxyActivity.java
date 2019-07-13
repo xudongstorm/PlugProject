@@ -2,7 +2,6 @@ package com.example.pluginlib;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,16 +25,24 @@ public class ProxyActivity extends AppCompatActivity {
     private void launchPluginActivity() {
         if(mPluginApk == null){
             Log.e("zxd", "loading your apk first please.");
+            return;
         }
         try {
             Class<?> clazz = mPluginApk.mClassLoader.loadClass(mClassName);
-            Object objetc = clazz.newInstance();
-            if(objetc instanceof IPlugin){
-                mIPlugin = (IPlugin) objetc;
-                mIPlugin.attach(this);
+            Object object = clazz.newInstance();
+            if(object instanceof IPlugin){
+                mIPlugin = (IPlugin) object;
+                mIPlugin.attach(this);  //把上下文传给插件APP
                 Bundle bundle = new Bundle();
                 bundle.putInt("FROM", IPlugin.FORM_EXTERNAL);
                 mIPlugin.onCreate(bundle);
+                /*ICallback<String> callback = new ICallback<String>() {
+                    @Override
+                    public void sendResult(String s) {
+
+                    }
+                };
+                mIPlugin.register(callback);*/
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +50,6 @@ public class ProxyActivity extends AppCompatActivity {
     }
 
     //特别注意
-
     @Override
     public Resources getResources() {
         return mPluginApk != null ? mPluginApk.mResource : super.getResources();
