@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -13,26 +14,22 @@ import dalvik.system.DexClassLoader;
 
 public class PluginManager {
 
-    private static final PluginManager instance = new PluginManager();
+    private static PluginManager instance;
     private Context mContext;
     private PluginApk mPluginApk;
 
-    public static PluginManager getInstance(){
+    public static PluginManager getInstance(Context context){
+        if(instance == null){
+            instance = new PluginManager(context);
+        }
         return instance;
-    }
-
-    private PluginManager(){}
-
-    public void init(Context context){
-        this.mContext = context;
-    }
-
-    public PluginApk getPluginApk(){
-        return mPluginApk;
     }
 
     //加载APK文件
     public void loadApk(String apkPath){
+        if(TextUtils.isEmpty(apkPath)){
+            return;
+        }
         PackageInfo packageInfo = mContext.getPackageManager().getPackageArchiveInfo(apkPath,
                 PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES);
         if(packageInfo == null){
@@ -44,6 +41,15 @@ public class PluginManager {
         AssetManager am = createAssetManager(apkPath);
         Resources resources = createResource(am);
         mPluginApk = new PluginApk(classLoader, resources, packageInfo, am);
+    }
+
+    private PluginManager(Context context){
+        this.mContext = context;
+    }
+
+
+    public PluginApk getPluginApk(){
+        return mPluginApk;
     }
 
     private Resources createResource(AssetManager am) {

@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.pluginlib.ProxyActivity"    />
-        <activity android:name="com.example.pluginlib.PluginActivity"   />
+        <activity android:name="com.example.pluginlib.BasePluginActivity"   />
     </application>
 
 </manifest>

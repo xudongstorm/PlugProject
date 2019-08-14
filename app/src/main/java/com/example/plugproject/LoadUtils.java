@@ -8,9 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Utils {
+public class LoadUtils {
 
-    public static String copyAssetAndWrite(Context context,String fileName) throws Exception {
+    //把asset目录下的插件apk文件下载到指定文件缓存中
+    public static String copyAssetAndWrite(Context context, String fileName) throws Exception {
         File cacheDir = context.getCacheDir();
         if(!cacheDir.exists()){
             cacheDir.mkdirs();

@@ -3,7 +3,7 @@ package com.example.pluginlib;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class PluginActivity extends Activity implements IPlugin {
+public class BasePluginActivity extends Activity implements IPlugin {
 
     private int mFrom = FROM_INTERNAL;
     private Activity mProxyActivity;

@@ -1,12 +1,13 @@
 package com.example.plugproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.pluginlib.PluginActivity;
 import com.example.pluginlib.PluginManager;
 import com.example.pluginlib.ProxyActivity;
 
@@ -22,8 +23,12 @@ public class MainActivity extends AppCompatActivity {
         loadApk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String apkPath = Utils.copyAssetAndWrite(MainActivity.this, "apk");
-                PluginManager.getInstance().loadApk(apkPath);
+                try {
+                    String apkPath = LoadUtils.copyAssetAndWrite(MainActivity.this, "zxd.apk");
+                    PluginManager.getInstance(MainActivity.this).loadApk(apkPath);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProxyActivity.class);
-                intent.putExtra("className", "com.example.neplugin.NePluginActivity");
+                intent.putExtra("className", "com.example.neplugin.MyPluginActivity");
                 startActivity(intent);
             }
         });

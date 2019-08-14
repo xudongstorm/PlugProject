@@ -1,11 +1,10 @@
 package com.example.neplugin;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.pluginlib.PluginActivity;
+import com.example.pluginlib.BasePluginActivity;
 
-public class NePluginActivity extends PluginActivity {
+public class MyPluginActivity extends BasePluginActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

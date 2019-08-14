@@ -9,15 +9,47 @@ import dalvik.system.DexClassLoader;
 public class PluginApk {
 
     //插件APK的实体对象
-    public DexClassLoader mClassLoader;
-    public Resources mResource;
-    public PackageInfo mPackageInfo;
-    public AssetManager mAssetManager;
+    private DexClassLoader mClassLoader;
+    private Resources mResource;
+    private AssetManager mAssetManager;
+    private PackageInfo mPackageInfo;
 
     public PluginApk(DexClassLoader mClassLoader, Resources mResource, PackageInfo mPackageInfo, AssetManager mAssetManager){
         this.mClassLoader = mClassLoader;
         this.mResource = mResource;
         this.mPackageInfo = mPackageInfo;
+        this.mAssetManager = mAssetManager;
+    }
+
+    public DexClassLoader getClassLoader() {
+        return mClassLoader;
+    }
+
+    public void setClassLoader(DexClassLoader mClassLoader) {
+        this.mClassLoader = mClassLoader;
+    }
+
+    public Resources getResource() {
+        return mResource;
+    }
+
+    public void setResource(Resources mResource) {
+        this.mResource = mResource;
+    }
+
+    public PackageInfo getPackageInfo() {
+        return mPackageInfo;
+    }
+
+    public void setPackageInfo(PackageInfo mPackageInfo) {
+        this.mPackageInfo = mPackageInfo;
+    }
+
+    public AssetManager getAssetManager() {
+        return mAssetManager;
+    }
+
+    public void setAssetManager(AssetManager mAssetManager) {
         this.mAssetManager = mAssetManager;
     }
 }
