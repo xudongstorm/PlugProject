@@ -69,6 +69,7 @@ public class PluginManager {
         return null;
     }
 
+    //获取插件dex的DexClassLoader，用来加载插件dex的任何一个类
     private DexClassLoader createDexClassLoader(String apkPath) {
         File file = mContext.getDir("dex", Context.MODE_PRIVATE);
         return new DexClassLoader(apkPath, file.getAbsolutePath(), null, mContext.getClassLoader());
