@@ -7,7 +7,6 @@ public class BasePluginActivity extends Activity implements IPlugin {
 
     private int mFrom = FROM_INTERNAL;
     private Activity mProxyActivity;
-//    protected ICallback callback;
 
     @Override
     public void attach(Activity proxyActivity) {
@@ -24,11 +23,6 @@ public class BasePluginActivity extends Activity implements IPlugin {
             mProxyActivity = this;
         }
     }
-
-    /*@Override
-    public void register(ICallback callback) {
-        this.callback = callback;
-    }*/
 
     @Override
     public void setContentView(int layoutResID) {
